@@ -81,5 +81,6 @@ if __name__ == '__main__':
 
     shutil.rmtree(target_path)
     uniq_results = dedup(results)
-    with open(args.output, 'w') as fp:
-        fp.write(pformat(uniq_results))
+    if len(uniq_results) > 0:
+        with open(args.output, 'w') as fp:
+            fp.write(pformat(uniq_results))
