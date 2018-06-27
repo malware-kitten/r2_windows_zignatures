@@ -52,9 +52,8 @@ def generate_zigs_sdb(f, output):
     r2p = r2pipe.open(f)
     #analyze and generate zigs
     r2p.cmd('aaa; zg')
-    zigs = r2p.cmdj('zos %s' % output)
+    zigs = r2p.cmd('zos %s' % output)
     r2p.quit()
-    return zigs
 
 def dedup(zignatures):
     observed = {}
@@ -83,7 +82,7 @@ if __name__ == '__main__':
         results = []
         for f in recursive_all_files(target_path, 'obj'):
             if args.sdb:
-                generate_zigs_sdb(f, args.output)
+                generate_zigs_sdb(f, f.split("\\")[-1]+".sdb")
             else:
                 json_items = generate_zigs_json(f)
                 for zigs in json_items:
